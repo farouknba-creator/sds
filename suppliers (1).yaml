@@ -1,0 +1,40 @@
+# SDS Studio - Supplier / Legal Entity Database
+# Add, edit, or remove entities here (or use the Suppliers tab in the app).
+# Each entity can be selected per-session to populate the standard SDS template.
+
+suppliers:
+  - id: "supplier_001"
+    legal_name: "Acme Chemical Corporation"
+    dba: ""                              # "Doing Business As" - optional
+    address:
+      street: "100 Industrial Parkway"
+      street2: ""
+      city: "Houston"
+      state: "TX"
+      postal_code: "77032"
+      country: "USA"
+    phone: "+1-713-555-0142"
+    emergency_phone: "+1-800-424-9300"   # CHEMTREC
+    website: "https://www.acme-chem.example"
+    email: "sds@acme-chem.example"
+    regulatory_contact: "Regulatory Affairs Dept."
+    logo_path: "assets/logos/acme.png"   # relative to app root or absolute
+
+  - id: "supplier_002"
+    legal_name: "EuroLab GmbH"
+    dba: ""
+    address:
+      street: "Industriestraße 42"
+      street2: ""
+      city: "Ludwigshafen"
+      state: ""
+      postal_code: "67063"
+      country: "Germany"
+    phone: "+49 621 555 0199"
+    emergency_phone: "+49 30 19240"      # German poison control
+    website: "https://www.eurolab.example"
+    email: "safety@eurolab.example"
+    regulatory_contact: "Produktsicherheit"
+    logo_path: "assets/logos/eurolab.png"
+
+# Add more suppliers below this line. IDs must be unique.

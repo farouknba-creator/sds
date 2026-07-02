@@ -1,0 +1,27 @@
+# SDS Studio - Python dependencies
+# Python 3.11 recommended
+
+# GUI
+PySide6==6.7.3
+
+# PDF processing
+PyMuPDF==1.24.10
+pdfplumber==0.11.4
+reportlab==4.2.5
+
+# OCR (optional, for scanned pages)
+pytesseract==0.3.13
+# Tesseract binary must be installed separately on the build machine,
+# then bundled into the portable folder under /tesseract/
+
+# AI providers - all optional, you only need the ones you use
+openai==1.51.0          # Works for both OpenAI direct AND Azure OpenAI
+anthropic==0.36.2       # Claude
+ollama==0.3.3           # Local Ollama
+
+# Config / validation
+pydantic==2.9.2
+PyYAML==6.0.2
+
+# Packaging (build-time only)
+pyinstaller==6.10.0

@@ -1,0 +1,90 @@
+# Build SDS Studio as a portable Windows .exe on every push / tag.
+#
+# Artifacts: a zipped portable folder you can download from the Actions tab.
+# No local Python install needed - GitHub builds it for you.
+#
+# To use:
+#   1. Push this project to a GitHub repo
+#   2. Go to Actions tab -> "Build Portable EXE" workflow -> Run workflow
+#   3. Download the artifact SDSStudio-portable-windows.zip
+#
+name: Build Portable EXE
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:   # manual trigger from Actions UI
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        shell: cmd
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+          pip install -e . --no-deps
+
+      - name: Verify package is importable
+        shell: cmd
+        run: |
+          python -c "import sds_studio; print('sds_studio OK:', sds_studio.__file__)"
+          python -c "from PyInstaller.utils.hooks import collect_submodules; subs = collect_submodules('sds_studio'); print(f'Found {len(subs)} submodules'); [print(' -', s) for s in subs]"
+
+      - name: Build with PyInstaller
+        shell: cmd
+        run: pyinstaller sds_studio.spec --clean --noconfirm
+
+      - name: Verify exe exists
+        shell: powershell
+        run: |
+          if (-not (Test-Path "dist\SDSStudio\SDSStudio.exe")) {
+            Write-Error "SDSStudio.exe was not produced"
+            exit 1
+          }
+          $size = (Get-Item "dist\SDSStudio\SDSStudio.exe").Length / 1MB
+          Write-Host "SDSStudio.exe size: $([math]::Round($size,1)) MB"
+
+      - name: Stage runtime files
+        shell: cmd
+        run: |
+          if not exist dist\SDSStudio\config mkdir dist\SDSStudio\config
+          if not exist dist\SDSStudio\assets mkdir dist\SDSStudio\assets
+          if not exist dist\SDSStudio\assets\logos mkdir dist\SDSStudio\assets\logos
+          if not exist dist\SDSStudio\input mkdir dist\SDSStudio\input
+          if not exist dist\SDSStudio\output mkdir dist\SDSStudio\output
+          if not exist dist\SDSStudio\review_queue mkdir dist\SDSStudio\review_queue
+          if not exist dist\SDSStudio\logs mkdir dist\SDSStudio\logs
+          xcopy /e /i /y /q config dist\SDSStudio\config
+          xcopy /e /i /y /q assets dist\SDSStudio\assets
+
+      - name: Zip portable folder
+        shell: powershell
+        run: |
+          Compress-Archive -Path dist\SDSStudio\* -DestinationPath SDSStudio-portable-windows.zip -Force
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SDSStudio-portable-windows
+          path: SDSStudio-portable-windows.zip
+          retention-days: 30
+
+      - name: Attach to release (on tag)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SDSStudio-portable-windows.zip

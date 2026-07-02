@@ -1,0 +1,66 @@
+# SDS Studio - Global Settings
+# Edit this file to configure AI providers and app behavior.
+# This file is loaded at startup; changes take effect on app restart.
+
+ai:
+  # Provider options:
+  #   - openai        : OpenAI direct (api.openai.com)
+  #   - azure_openai  : Azure OpenAI Service (corporate-friendly)
+  #   - anthropic     : Claude API
+  #   - ollama        : Local Ollama instance (home PC)
+  #   - manual        : No AI calls; user reviews & edits extracted text by hand
+  provider: manual
+
+  openai:
+    api_key: ""
+    model: "gpt-4o-mini"
+
+  azure_openai:
+    api_key: ""
+    endpoint: "https://YOUR-RESOURCE.openai.azure.com"
+    api_version: "2024-06-01"
+    deployment_name: "gpt-4o-mini"
+    model: "gpt-4o-mini"
+
+  anthropic:
+    api_key: ""
+    model: "claude-3-5-sonnet-20241022"
+
+  ollama:
+    host: "http://localhost:11434"
+    model: "llama3.1:8b"
+
+  # Local OpenAI-compatible server - works with LM Studio, llama.cpp,
+  # vLLM, Ollama's /v1 endpoint, etc. Use this to run GLM-4.6 locally.
+  local_server:
+    base_url: "http://localhost:1234/v1"   # LM Studio default
+    model: "glm-4.6"                       # whatever model you loaded in the server
+    api_key: "local"                       # most local servers ignore this
+
+  # Behavior flags
+  auto_ocr: true                    # OCR pages with little extractable text
+  ocr_text_threshold: 50            # chars per page below which OCR triggers
+  review_threshold: "always"        # always | flagged | never
+  max_concurrent_files: 3           # parallel processing
+  retry_attempts: 2                 # on AI call failure
+  retry_backoff_seconds: 2
+
+app:
+  # Default paths (relative to app root, can be absolute)
+  input_dir: "input"
+  output_dir: "output"
+  review_dir: "review_queue"
+  logs_dir: "logs"
+  suppliers_file: "config/suppliers.yaml"
+  template_config: "config/template_config.yaml"
+  default_standard: "osha_hcs_2012"  # osha_hcs_2012 | ghs_rev9 | eu_clp | iso_11014
+
+  # GUI
+  theme: "light"                     # light | dark | system
+  window_width: 1400
+  window_height: 900
+
+logging:
+  level: "INFO"                      # DEBUG | INFO | WARNING | ERROR
+  file: "logs/sds_studio.log"
+  audit_csv: "logs/audit.csv"        # one row per processed file

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sds-studio"
+version = "0.1.0"
+description = "Portable AI-assisted batch editor for Safety Data Sheet (SDS) PDFs"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "SDS Studio"}]
+
+dependencies = [
+    "PySide6>=6.7",
+    "PyMuPDF>=1.24",
+    "pdfplumber>=0.11",
+    "reportlab>=4.2",
+    "pydantic>=2.9",
+    "PyYAML>=6.0",
+    "openai>=1.50",
+]
+
+[project.optional-dependencies]
+ocr = ["pytesseract>=0.3.13"]
+anthropic = ["anthropic>=0.36"]
+ollama = ["ollama>=0.3"]
+all = ["pytesseract>=0.3.13", "anthropic>=0.36", "ollama>=0.3"]
+
+[project.gui-scripts]
+sds-studio = "sds_studio.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sds_studio*"]
+exclude = ["tests*", "scripts*", "build*", "dist*"]

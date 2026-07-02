@@ -1,0 +1,129 @@
+# SDS Studio - Template Configuration
+# Controls the visual layout of the generated standard SDS PDFs.
+
+template:
+  # Page geometry
+  page_size: "A4"                      # A4 | Letter
+  margin_top_mm: 18
+  margin_bottom_mm: 18
+  margin_left_mm: 18
+  margin_right_mm: 18
+
+  # Typography (neutral palette)
+  font_family_body: "Helvetica"        # ReportLab built-ins: Helvetica | Times-Roman | Courier
+  font_family_heading: "Helvetica-Bold"
+  font_size_body: 9
+  font_size_heading: 11
+  font_size_section_title: 13
+  font_size_header_footer: 8
+  line_height_body: 12
+
+  # Colors (neutral / professional)
+  color_text: "#1A1A1A"
+  color_heading: "#0F2A44"
+  color_section_bar: "#0F2A44"
+  color_section_bar_text: "#FFFFFF"
+  color_table_header_bg: "#E8ECF0"
+  color_table_border: "#B8C2CC"
+  color_link: "#1F5FB0"
+
+  # Logo placement - fixed-height box, auto-width (since your logos differ by ~30% width but same height)
+  logo_height_mm: 14
+  logo_max_width_mm: 50
+  logo_position: "right"               # left | right
+  logo_padding_mm: 2
+
+  # Header / Footer
+  header_show_supplier: true           # supplier legal name top-left
+  header_show_document_title: true     # "SAFETY DATA SHEET" top-center
+  footer_show_page_numbers: true
+  footer_show_revision_date: true
+  footer_disclaimer: "This SDS was reformatted by SDS Studio. Original supplier data has been preserved."
+
+  # Section layout
+  section_bar_full_width: true         # colored bar across the page
+  section_number_in_bar: true          # e.g. "SECTION 1: IDENTIFICATION"
+  show_empty_sections: true            # render placeholder text if section is missing
+
+# Per-standard section ordering & titles
+# Each standard defines its 16 (or fewer) sections in order.
+standards:
+  osha_hcs_2012:
+    name: "OSHA HCS 2012 (US)"
+    sections:
+      - {num: 1, title: "Identification"}
+      - {num: 2, title: "Hazard(s) Identification"}
+      - {num: 3, title: "Composition/Information on Ingredients"}
+      - {num: 4, title: "First-Aid Measures"}
+      - {num: 5, title: "Fire-Fighting Measures"}
+      - {num: 6, title: "Accidental Release Measures"}
+      - {num: 7, title: "Handling and Storage"}
+      - {num: 8, title: "Exposure Controls/Personal Protection"}
+      - {num: 9, title: "Physical and Chemical Properties"}
+      - {num: 10, title: "Stability and Reactivity"}
+      - {num: 11, title: "Toxicological Information"}
+      - {num: 12, title: "Ecological Information"}
+      - {num: 13, title: "Disposal Considerations"}
+      - {num: 14, title: "Transport Information"}
+      - {num: 15, title: "Regulatory Information"}
+      - {num: 16, title: "Other Information"}
+
+  ghs_rev9:
+    name: "GHS Rev. 9 (International)"
+    sections:
+      - {num: 1, title: "Identification"}
+      - {num: 2, title: "Hazard(s) Identification"}
+      - {num: 3, title: "Composition/Information on Ingredients"}
+      - {num: 4, title: "First-Aid Measures"}
+      - {num: 5, title: "Fire-Fighting Measures"}
+      - {num: 6, title: "Accidental Release Measures"}
+      - {num: 7, title: "Handling and Storage"}
+      - {num: 8, title: "Exposure Controls/Personal Protection"}
+      - {num: 9, title: "Physical and Chemical Properties"}
+      - {num: 10, title: "Stability and Reactivity"}
+      - {num: 11, title: "Toxicological Information"}
+      - {num: 12, title: "Ecological Information"}
+      - {num: 13, title: "Disposal Considerations"}
+      - {num: 14, title: "Transport Information"}
+      - {num: 15, title: "Regulatory Information"}
+      - {num: 16, title: "Other Information"}
+
+  eu_clp:
+    name: "EU CLP (Regulation (EC) No 1272/2008)"
+    sections:
+      - {num: 1, title: "Identification of the substance/mixture and of the company/undertaking"}
+      - {num: 2, title: "Hazards identification"}
+      - {num: 3, title: "Composition/information on ingredients"}
+      - {num: 4, title: "First aid measures"}
+      - {num: 5, title: "Firefighting measures"}
+      - {num: 6, title: "Accidental release measures"}
+      - {num: 7, title: "Handling and storage"}
+      - {num: 8, title: "Exposure controls/personal protection"}
+      - {num: 9, title: "Physical and chemical properties"}
+      - {num: 10, title: "Stability and reactivity"}
+      - {num: 11, title: "Toxicological information"}
+      - {num: 12, title: "Ecological information"}
+      - {num: 13, title: "Disposal considerations"}
+      - {num: 14, title: "Transport information"}
+      - {num: 15, title: "Regulatory information"}
+      - {num: 16, title: "Other information"}
+
+  iso_11014:
+    name: "ISO 11014:2009"
+    sections:
+      - {num: 1, title: "Identification of the substance/mixture and of the company/undertaking"}
+      - {num: 2, title: "Hazards identification"}
+      - {num: 3, title: "Composition/information on ingredients"}
+      - {num: 4, title: "First aid measures"}
+      - {num: 5, title: "Firefighting measures"}
+      - {num: 6, title: "Accidental release measures"}
+      - {num: 7, title: "Handling and storage"}
+      - {num: 8, title: "Exposure controls/personal protection"}
+      - {num: 9, title: "Physical and chemical properties"}
+      - {num: 10, title: "Stability and reactivity"}
+      - {num: 11, title: "Toxicological information"}
+      - {num: 12, title: "Ecological information"}
+      - {num: 13, title: "Disposal considerations"}
+      - {num: 14, title: "Transport information"}
+      - {num: 15, title: "Regulatory information"}
+      - {num: 16, title: "Other information"}
